@@ -1,3 +1,7 @@
+<?php
+include("connection.php");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +13,7 @@
 
 <?php
 
+
 $error_flag = "";
 $username_error = "";
 $userpassword_error = "";
@@ -18,15 +23,15 @@ $userpassword_error = "";
 if(isset($_POST['login_submit']))
 {
 
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-        {
-            echo "the method is post";
-        }
-        else
-            {
-                echo "the method is get";
-            }
-    die();
+    // if($_SERVER["REQUEST_METHOD"] == "POST")
+    //     {
+    //         echo "the method is post";
+    //     }
+    //     else
+    //         {
+    //             echo "the method is get";
+    //         }
+
 
     $user_name = $_POST["user_name"];
     $user_pass = $_POST["user_password"];
@@ -45,9 +50,10 @@ if(isset($_POST['login_submit']))
 
     if(empty($error_flag))
     {
-        if($user_name == "uzair" && $user_pass == "123")
+        if($user_name == "ali" && $user_pass == "123")
             {
-                header("Location:profile.php?name=uzair");
+                $_SESSION['user_name'] = $user_name; 
+                header("Location:profile.php");
             }
             else
             {

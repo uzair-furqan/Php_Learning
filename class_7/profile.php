@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +11,15 @@
 <body>
  <?php
  
- if(isset($_GET["name"]))
-
-    {
-        $name= $_GET["name"];
-        echo "<h1>WELCOME TO THE PROFILE $name</h1>";
-    }
+    if(!empty($_SESSION['user_name']))
+        {
+            echo "welcome ".$_SESSION['user_name'];
+        }
+        else
+        {
+            header("location:form.php");
+        }
+        // session_destroy();
  
  ?>
 </body>
