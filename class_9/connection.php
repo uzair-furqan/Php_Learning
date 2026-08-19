@@ -6,10 +6,10 @@ if(!$connection)
 {
     die();
 }
-else
-{
-    echo "connection successful";
-}
+// else
+// {
+//     echo "connection successful";
+// }
 
 
 

@@ -1,4 +1,5 @@
 <?php
+include("connection.php");
 session_start();
 ?>
 <!DOCTYPE html>
@@ -47,19 +48,21 @@ session_start();
 
         if(empty($error_flag))
         {
-            if($user_name == "uzair" && $user_password == "123")
+             if($user_password == $confirm_password)
             {
-                if($user_password == $confirm_password)
-                {
-                    $_SESSION["user_name"] = $user_name;
-                    $_SESSION["user_email"] = $user_email;
-                    header("Location:profile.php");
+                $sql = "INSERT INTO `registration` (`name` , `email`,`password`) VALUES ('$user_name' , '$user_email' , '$user_password')";
+                $result = mysqli_query($connection,$sql); // in create insert and delelte it returns 0 or 1 else returns result object
+                if($result)
+                    {
+                        header("location:profile.php");
+                    }
                 }
+
                 else
                     {
                         $user_cpass_error = "Please Enter The Same Password";
                     }
-            }
+
         }
     }
 
