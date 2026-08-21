@@ -40,6 +40,27 @@ session_start();
             $error_flag = "yes";
             $user_pass_error = "Please Enter Your Password";
         }
+        elseif(strlen($user_password) <= 7 )
+        {
+            $error_flag = "yes";
+            $user_pass_error = "Password must be greater than 8 character";
+        }
+        elseif(!preg_match('/[A-Z]/', $user_password))
+        {       
+            $error_flag = "yes";
+            $user_pass_error = "Password must contain one capital letter";
+        }
+        elseif(!preg_match('/[0-9]/', $user_password))
+        {       
+            $error_flag = "yes";
+            $user_pass_error = "Password must contain one number";
+        }
+        elseif(!preg_match('/[!@#$%^&*]/', $user_password))
+        {       
+            $error_flag = "yes";
+            $user_pass_error = "Password must contain one special character";
+        }
+
         if(empty($confirm_password))
         {
             $error_flag = "yes";
@@ -50,11 +71,12 @@ session_start();
         {
              if($user_password == $confirm_password)
             {
-                $sql = "INSERT INTO `registration` (`name` , `email`,`password`) VALUES ('$user_name' , '$user_email' , '$user_password')";
+                $hash_password = password_hash($user_password , PASSWORD_DEFAULT);
+                $sql = "INSERT INTO `registration` (`name` , `email`,`password`) VALUES ('$user_name' , '$user_email' , '$hash_password')";
                 $result = mysqli_query($connection,$sql); // in create insert and delelte it returns 0 or 1 else returns result object
                 if($result)
                     {
-                        header("location:profile.php");
+                        header("location:login.php");
                     }
                 }
 
@@ -82,6 +104,8 @@ session_start();
         <label for="pass">PASSWORD :</label>
         <input type="password" name="user_password" id="pass">
         <?php if(!empty($user_pass_error)){ echo "<p style='color:red'>$user_pass_error</p>"; } ?>
+        <br>
+        <input type="checkbox" name="" id="checkbox" onclick="toogle()">Show Password
 
         <br>
         <label for="cpass">CONFIRM PASSWORD</label>
@@ -91,5 +115,18 @@ session_start();
         <br>
         <input type="submit" name="registration_submit" value="REGISTER">
     </form>
+
+    <script>
+        function toogle()
+        {
+        let pass = document.getElementById("pass");
+        let check = document.getElementById("checkbox");
+
+        if (pass.type == "password") {
+           pass.type == "text"
+        }
+        }
+
+    </script>
 </body>
 </html>
