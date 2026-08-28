@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Login</title>
 </head>
 <body>
     <?php
@@ -32,6 +32,7 @@ session_start();
             $user_pass_error = "Please Enter Your Password";
         }
 
+
         if(empty($error_flag))
         {
             $sql = "SELECT * FROM `registration` where `email` = '$user_email' ORDER BY `id` LIMIT 1";
@@ -41,15 +42,15 @@ session_start();
             {
                 $row = mysqli_fetch_assoc($data);
                 if(password_verify($user_password , $row['password']))
-                    {
-                        $user_name = $row["name"];
-                        $_SESSION["user_name"] = $user_name;
-                        header("Location: profile.php");
-                    }
-                    else
-                    {
-                            $user_pass_error = "EMAIL/PASSWORD IS INCORRECT";
-                    }
+                {
+                    $user_name = $row["name"];
+                    $_SESSION["user_name"] = $user_name;
+                    header("Location: profile.php");
+                }
+                else
+                {
+                    $user_pass_error = "EMAIL/PASSWORD IS INCORRECT";
+                }
             }
             else
             {

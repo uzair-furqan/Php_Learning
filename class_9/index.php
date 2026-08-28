@@ -35,6 +35,16 @@ session_start();
             $error_flag = "yes";
             $user_email_error = "Please Enter Your Email";
         }
+        else
+        {
+            $check_email = "SELECT `email` from `registration` where `email` = '$user_email'";
+            $check_data = mysqli_query($connection , $check_email);
+            if($check_data->num_rows > 0)
+            {
+                $error_flag = "yes";
+                $user_email_error = "This Email is already Registered";
+            }
+        }
         if(empty($user_password))
         {
             $error_flag = "yes";
@@ -91,6 +101,7 @@ session_start();
     
     
     ?>
+    <h1>REGISTRATION FORM</h1>
     <form method="post">
         <label for="name">NAME :</label>
         <input type="text" name="user_name" id="name">
@@ -102,10 +113,10 @@ session_start();
 
         <br>
         <label for="pass">PASSWORD :</label>
-        <input type="password" name="user_password" id="pass">
+        <input type="password" name="user_password" id="password">
         <?php if(!empty($user_pass_error)){ echo "<p style='color:red'>$user_pass_error</p>"; } ?>
         <br>
-        <input type="checkbox" name="" id="checkbox" onclick="toogle()">Show Password
+        <input type="checkbox" name="" id="checkbox" onclick="showPassword()">Show Password
 
         <br>
         <label for="cpass">CONFIRM PASSWORD</label>
@@ -114,18 +125,19 @@ session_start();
 
         <br>
         <input type="submit" name="registration_submit" value="REGISTER">
+        <a href="login.php">Login Here</a>
     </form>
 
     <script>
-        function toogle()
-        {
-        let pass = document.getElementById("pass");
-        let check = document.getElementById("checkbox");
+function showPassword() {
+    const password = document.getElementById("password");
 
-        if (pass.type == "password") {
-           pass.type == "text"
-        }
-        }
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}
 
     </script>
 </body>

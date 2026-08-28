@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(empty($_SESSION["user_name"]))
+    {
+        header("Location:login.php");
+    }
 
 if(isset($_SESSION["user_name"]))
 {
@@ -8,3 +12,5 @@ if(isset($_SESSION["user_name"]))
 }
 
 ?>
+
+<a href="logout.php">Logout</a>
