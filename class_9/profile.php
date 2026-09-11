@@ -1,16 +1,40 @@
 <?php
+include("connection.php");
 session_start();
 
-if(empty($_SESSION["user_name"]))
+if(empty($_SESSION["user_id"]))
     {
         header("Location:login.php");
     }
+    else
+    {
+        $sql = "SELECT * FROM `registration` WHERE `id` = {$_SESSION['user_id']}";
+        $data = mysqli_query($connection , $sql);
+        if($data -> num_rows > 0)
+            {
+                $row = mysqli_fetch_array($data);
+            }
 
-if(isset($_SESSION["user_name"]))
-{
-    echo "<h1> WELCOME </h1> ".$_SESSION['user_name'];
-}
+    }
+
 
 ?>
 
-<a href="logout.php">Logout</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Profile :</h1>
+
+    <h3>Name : <?php echo $row[1];  ?></h3>
+    <h3>Email : <?php echo $row[2];  ?></h3>
+
+    <a href="update_profile.php">Edit</a>
+    <a href="delete_profile.php">Delete</a>
+    <a href="logout.php">Logout</a>
+</body>
+</html>

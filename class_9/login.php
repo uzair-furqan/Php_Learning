@@ -10,6 +10,7 @@ session_start();
     <title>Login</title>
 </head>
 <body>
+    <h1>Login</h1>
     <?php
     
     $error_flag = "";
@@ -43,8 +44,8 @@ session_start();
                 $row = mysqli_fetch_assoc($data);
                 if(password_verify($user_password , $row['password']))
                 {
-                    $user_name = $row["name"];
-                    $_SESSION["user_name"] = $user_name;
+                    $user_id = $row['id'];
+                    $_SESSION["user_id"] = $user_id;
                     header("Location: profile.php");
                 }
                 else
@@ -62,7 +63,7 @@ session_start();
     
     
     ?>
-    <form method="post">
+    <form method="post" enctype="">
         
         <label for="email">EMAIL :</label>
         <input type="email" name="user_email" id="email">
@@ -76,6 +77,7 @@ session_start();
 
         <br>
         <input type="submit" name="login_submit" value="REGISTER">
+        <a href="index.php">Register</a>
     </form>
 
 
