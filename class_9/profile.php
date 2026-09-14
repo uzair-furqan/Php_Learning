@@ -26,9 +26,24 @@ if(empty($_SESSION["user_id"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .profile_pic
+        {
+            width: 122px;
+            height: 122px;
+            border:1px solid grey;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Profile :</h1>
+    <div class="profile_pic">
+    <img src="<?php echo $row[4]?>" alt="">
+    </div>
 
     <h3>Name : <?php echo $row[1];  ?></h3>
     <h3>Email : <?php echo $row[2];  ?></h3>
