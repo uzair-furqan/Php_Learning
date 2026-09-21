@@ -54,6 +54,7 @@ if(empty($_SESSION["user_id"]))
         $user_img_name = $_FILES["user_img"]["name"];
         $user_img_tmp_name = $_FILES["user_img"]["tmp_name"];
         $user_img_type = $_FILES["user_img"]["type"];
+        $user_img_size = $_FILES["user_img"]["size"];
 
 
         if(empty($user_name))
@@ -74,12 +75,22 @@ if(empty($_SESSION["user_id"]))
             $old_image = $row[4];
             $image_path = $old_image;
         }
+        // 1024 bytes 1 kb , 1024 kb  1mb , 1024 in 1GB
         else
         {
             if($user_img_type == "image/jpeg" || $user_img_type == "image/jpg" || $user_img_type == "image/png" || $user_img_type == "image/jfif" || $user_img_type == "image/avif")
                 {
-                    move_uploaded_file($user_img_tmp_name , "user_images/".$user_img_name);
-                    $image_path = "user_images/".$user_img_name;
+                    if($user_img_size > 1024 * 1024 )
+                        {
+                            $error_flag = "Yes";
+                            $user_img_error = "Image Must be smaller than 1 MB";
+                        }
+                        else
+                            {
+                                move_uploaded_file($user_img_tmp_name , "user_images/".$user_img_name);
+                                $image_path = "user_images/".$user_img_name;
+                            }
+                   
                 }
                 else
                 {
