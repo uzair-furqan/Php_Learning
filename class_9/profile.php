@@ -40,6 +40,7 @@ if(empty($_SESSION["user_id"]))
     </style>
 </head>
 <body>
+    <?php include("navbar.php"); ?>
     <h1>Profile :</h1>
     <div class="profile_pic">
     <img src="<?php echo $row[4]?>" alt="">
