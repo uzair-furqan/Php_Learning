@@ -1,3 +1,7 @@
+<?php
+
+session_start();
+?>
 <style>
     *
     {
@@ -64,12 +68,29 @@
         <a href="">About</a>
         <a href="">Contact</a>
         <a href="">Products</a>
+        <?php
+            if(!empty($_SESSION["user_role"]))
+                {?>
+                <a href="">ADMIN PANEL</a>
+               <?php }
+        ?>
+        
     </div>
     <div class="buttons">
-        <a href="">Login</a>
+        <?php
+        if(empty($_SESSION["user_id"]))
+            { ?>
+                <a href="login.php">LOGIN</a>
+           <?php }
+
+           else
+            { ?>
+                <a href="logout.php">LOGOUT</a>
+          <?php  }
+        ?>
     </div>
 </nav>
 
-<script>`
+<script>
     
 </script>

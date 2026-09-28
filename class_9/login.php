@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include("connection.php");
 session_start();
 ?>
@@ -10,6 +11,7 @@ session_start();
     <title>Login</title>
 </head>
 <body>
+    <?php include("navbar.php"); ?>
     <h1>Login</h1>
     <?php
     
@@ -45,6 +47,8 @@ session_start();
                 if(password_verify($user_password , $row['password']))
                 {
                     $user_id = $row['id'];
+                    $user_role = $row['role'];
+                    $_SESSION["user_role"] = $user_role;
                     $_SESSION["user_id"] = $user_id;
                     header("Location: profile.php");
                 }
