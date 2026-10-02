@@ -68,10 +68,11 @@ session_start();
         <a href="">About</a>
         <a href="">Contact</a>
         <a href="">Products</a>
+        <a href="profile.php">profile</a>
         <?php
             if(!empty($_SESSION["user_role"]))
                 {?>
-                <a href="">ADMIN PANEL</a>
+                <a href="admin_panel.php">ADMIN PANEL</a>
                <?php }
         ?>
         
