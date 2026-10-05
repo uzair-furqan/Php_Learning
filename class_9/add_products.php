@@ -60,7 +60,7 @@
         {
             if($product_img_type == "image/jpeg" || $product_img_type == "image/jpg" || $product_img_type == "image/png" || $product_img_type == "image/jfif" || $product_img_type == "image/avif")
                 {
-                    if($product_img_size > 1024 * 1024 )
+                    if($product_img_size > 2 * 1024 * 1024 )
                         {
                             $error_flag = "Yes";
                             $product_img_error = "Image Must be smaller than 1 MB";
@@ -68,7 +68,7 @@
                         else
                             {
                                 move_uploaded_file($product_img_tmp_name , "product_images/".$product_img_name);
-                                $image_path = "user_images/".$product_img_name;
+                                $image_path = "product_images/".$product_img_name;
                             }
                    
                 }

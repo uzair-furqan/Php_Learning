@@ -67,7 +67,7 @@ session_start();
         <a href="">Home</a>
         <a href="">About</a>
         <a href="">Contact</a>
-        <a href="">Products</a>
+        <a href="products.php">Products</a>
         <a href="profile.php">profile</a>
         <?php
             if(!empty($_SESSION["user_role"]))
