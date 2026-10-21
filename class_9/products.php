@@ -58,7 +58,8 @@ box-shadow:  10px 10px 20px #9e9e9e,
     $data = mysqli_query($connection , $sql);
 
     while($row = mysqli_fetch_assoc($data))
-        {?>
+        {
+            ?>
         <div class="card">
         <div class="card-img">
             <img src="<?php echo $row["product_image"]; ?>" alt="">
@@ -67,6 +68,9 @@ box-shadow:  10px 10px 20px #9e9e9e,
         <h1><?php echo $row["name"] ?></h1>
         <h2><?php echo $row["category"] ?></h2>
         <h2><?php echo $row["price"] ?></h2>
+        <a href="edit_products.php?pd_id=<?php echo $row['product_id'] ?>">Edit</a>
+        <a href="delete_products.php">Delete</a>
+
         </div>
         </div>
 <?php } ?>
